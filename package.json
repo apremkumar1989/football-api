@@ -1,0 +1,18 @@
+{
+  "name": "football-api",
+  "version": "1.0.0",
+  "description": "football-api",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Prem Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.0.0",
+    "express": "^4.15.3",
+    "mocha": "^3.4.2",
+    "should": "^11.2.1",
+    "supertest": "^3.0.0"
+  }
+}
