@@ -12,6 +12,9 @@
     "chai": "^4.0.0",
     "express": "^4.15.3",
     "mocha": "^3.4.2",
+    "mock-require": "^2.0.2",
+    "proxyquire": "^1.8.0",
+    "rewire": "^2.5.2",
     "should": "^11.2.1",
     "supertest": "^3.0.0"
   }
