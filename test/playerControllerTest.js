@@ -14,6 +14,7 @@ var playerService = mock('../services/playerService.js',{
 		'name' : 'Ronaldinho',
 		'dob' : '03-07-1983',
 		'country' : 'Brazil',
+    'position' : 'attacker'
 	};
 	return player;
   }
@@ -32,7 +33,7 @@ describe('/players', function() {
       .expect(200)
       .end(function(err,res){
       	res.body.should.have.keys('offset','limit','total_results','players');
-      	res.body.players[0].should.have.keys('id','name','country','dob');
+      	res.body.players[0].should.have.keys('id','name','country','dob','position');
       	done(err);
       });
   });
@@ -53,7 +54,7 @@ describe('/players/:id', function() {
       .expect(200)
       .end(function(err,res){
       	res.body.should.have.keys('player');
-      	res.body.player.should.have.keys('id','name','country','dob');
+      	res.body.player.should.have.keys('id','name','country','dob','position');
       	done(err);
       });
   });

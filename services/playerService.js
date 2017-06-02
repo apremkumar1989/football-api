@@ -7,6 +7,7 @@ module.exports.getPlayerById = function(id){
 		'name' : 'Ronaldinho',
 		'dob' : '03-07-1983',
 		'country' : 'Brazil',
+		'position' : 'attacker'
 	};
 
 	return player;
