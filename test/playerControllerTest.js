@@ -7,7 +7,9 @@ var mock = require('mock-require');
 var playerService = mock('../services/playerService.js',{
   getPlayerById : function(id){ 
   	if (id>100)
-  		return null;
+  		return new Promise((resolve,reject)=>{
+        resolve(null);
+      });
   	
 	player = {
 		'id' : id,
@@ -16,7 +18,9 @@ var playerService = mock('../services/playerService.js',{
 		'country' : 'Brazil',
     'position' : 'attacker'
 	};
-	return player;
+	return new Promise((resolve,reject)=>{
+      resolve(player);
+    });
   }
 });
 var players = require('../controllers/playercontroller');
