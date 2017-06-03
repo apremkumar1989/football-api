@@ -16,6 +16,7 @@ router.get('/',function(req, res){
 				'limit' : 10,
 				'players' : players
 			});
+			return;
 		}
 		res.status(200).json({
 				'total_results' : 0,

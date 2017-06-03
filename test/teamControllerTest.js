@@ -6,7 +6,9 @@ var mock = require('mock-require');
 var teamService = mock('../services/teamService.js',{
   getTeamById : function(id){ 
   	if (id>100)
-  		return null;
+  		return new Promise((resolve,reject)=>{
+        resolve(null);
+      });
   	
 	team = { 
 		'id' : id,
@@ -14,7 +16,9 @@ var teamService = mock('../services/teamService.js',{
 		'country' : 'England',
 		'team_type' : 'club'
 	};
-	return team;
+	return new Promise((resolve,reject)=>{
+      resolve(team);
+    });
   }
 });
 var teams = require('../controllers/teamController');
