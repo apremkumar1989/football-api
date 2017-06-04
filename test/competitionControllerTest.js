@@ -6,16 +6,20 @@ var mock = require('mock-require');
 var competitionService = mock('../services/competitionService.js',{
   getCompetitionById : function(id){ 
   	if (id>100)
-  		return null;
+  		return new Promise((resolve,reject)=>{
+        resolve(null);
+      });
   	
-	competition = { 
-		id : id,
-		name : 'Premier League',
-		type : 'league',
-		country : 'England',
-		year : 1997
-	};
-	return competition;
+    	competition = { 
+    		id : id,
+    		name : 'Premier League',
+    		type : 'league',
+    		country : 'England',
+    		year : 1997
+    	};
+	return new Promise((resolve,reject)=>{
+      resolve(competition);
+    });
   }
 });
 var competitions = require('../controllers/competitionController');

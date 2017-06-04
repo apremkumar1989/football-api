@@ -3,38 +3,60 @@ var router = express.Router();
 var competitionService = require('../services/competitionService.js');
 
 router.get('/',function(req, res){
-	competition = competitionService.getCompetitionById(1);
-	competitions = [competition,competition,competition];
+	competitionPromise = competitionService.getCompetitionById(1);
 
-	res.json({
-		'total_results' : 86,
-		'offset' : 3,
-		'limit' : 10,
-		'competitions' : competitions
+	competitionPromise.then((competition)=>{
+		if(competition!=null){
+			competitions = [competition,competition,competition];
+
+			res.json({
+				'total_results' : 86,
+				'offset' : 3,
+				'limit' : 10,
+				'competitions' : competitions
+			});
+			return;
+		}
+		res.status(200).json({
+				'total_results' : 0,
+				'offset' : 3,
+				'limit' : 10,
+				'competitions' : []
+			});	
+		
+	}).catch((err) =>{
+		res.status(500).send({ err_code: 'internal_server_error',message: 'internal_server_error' });
 	});
+	
 });
 
-router.get('/:team_id',function(req, res){
-	competition = competitionService.getCompetitionById(req.params.team_id);
-	if (competition==null){
-		res.status(404).send({ err_code: 'not_found',message: 'not found' });
-		return;
-	}
-	res.json({
-		'competition' : competition
+router.get('/:competition_id',function(req, res){
+	competitionPromise = competitionService.getCompetitionById(req.params.competition_id);
+
+	competitionPromise.then(competition=>{
+		if(competition){
+			res.json({
+				'competition' : competition
+			});
+			return;
+		}
+		res.status(404).send({message:'not found',err_code:'not_found'});
+	}).catch(err=>{
+		res.status(500).send({ err_code: 'internal_server_error',message: 'internal_server_error' });
 	});
+
 });
 
 router.post('/',function(req, res){
-	compeition = { 
-		'id' : id,
-		'name' : 'Premier League',
-		'type' : 'league',
-		'country' : 'England'
-	};
+	competition = req.body
+	competitionPromise = competitionService.createCompetition(competition);
 
-	res.json({
-		'competition' : compeition
+	competitionPromise.then(competition=>{
+		res.json({
+			'competition' : competition
+		});
+	}).catch(err=>{
+		res.status(500).send({ err_code: 'internal_server_error',message: 'internal_server_error' });
 	});
 });
 
